@@ -2,6 +2,11 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
 - file.yml
+# todo eli doesn't want the overlay to build
+# but in order to get the source to be read from
+# he needed to include it in resources.
+# Monday maybe we should try to remove the overlay
+# namespace after the replace finishes?
 - overlay.yml
 
 replacements:
