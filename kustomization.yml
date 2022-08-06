@@ -1,0 +1,17 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- file.yml
+- overlay.yml
+
+replacements:
+- source:
+    kind: Namespace
+    name: cat
+    fieldPath: metadata.stuff.[name=two].runbook
+  targets:
+  - select:
+      kind: Namespace
+      name: dog
+    fieldpaths:
+    - metadata.stuff.[name=two].runbook
