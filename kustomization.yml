@@ -2,21 +2,19 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
 - file.yml
-# todo eli doesn't want the overlay to build
-# but in order to get the source to be read from
-# he needed to include it in resources.
-# Monday maybe we should try to remove the overlay
-# namespace after the replace finishes?
+# Kustomize [eschews](https://kubectl.docs.kubernetes.io/faq/kustomize/eschewedfeatures/#removal-directives)
+# including resources for a yml you don't want built, but we need to build the yml
+# for the replacement to work.
 - overlay.yml
 
 replacements:
 - source:
-    kind: Namespace
-    name: cat
-    fieldPath: metadata.stuff.[name=two].runbook
+    kind: Configmap
+    name: runbooks
+    fieldPath: data.[name=two].runbook
   targets:
   - select:
       kind: Namespace
-      name: dog
+      name: file
     fieldpaths:
     - metadata.stuff.[name=two].runbook

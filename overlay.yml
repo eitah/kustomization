@@ -1,7 +1,8 @@
 apiVersion: v1
-kind: Namespace
+kind: Configmap
 metadata:
-  name: cat
-  stuff:
-  - name: two
-    runbook: IT WORKS!
+  name: runbooks
+data:
+# we replace the runbook url
+- name: two
+  runbook: IT WORKS!
